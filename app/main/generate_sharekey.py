@@ -2,6 +2,9 @@ from app.main.generate_siftedkey import Generate_Siftedkey
 from app.main.kr_Hamming import key_reconciliation_Hamming
 import threading
 from threading import Thread
+from qiskit_aer import AerSimulator
+
+
 
 num_qubit = 12
 
@@ -19,7 +22,7 @@ class Generate_Key(Thread):
         ka = ''
         kb = ''
         while (True):
-            part_ka, part_kb = Generate_Siftedkey(self.user0, self.user1, num_qubit)
+            part_ka, part_kb = Generate_Siftedkey(self.user0, self.user1, num_qubit, 0, backend=AerSimulator())
             ka += part_ka
             kb += part_kb
             print(len(ka))
@@ -53,7 +56,7 @@ class Generate_Key_Join():
         ka = ''
         kb = ''
         while (True):
-            part_ka, part_kb = Generate_Siftedkey(self.user0, self.user1, num_qubit)
+            part_ka, part_kb = Generate_Siftedkey(self.user0, self.user1, num_qubit, 0, backend=AerSimulator())
             ka += part_ka
             kb += part_kb
             print(len(ka))
